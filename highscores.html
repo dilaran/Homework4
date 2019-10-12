@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>High Scores</title>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="highscores.css" />
+  </head>
+  <style>
+      body{
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+  font-weight: 300;
+  text-align: center;
+  background-color: #f8f6f0;
+
+.container > * {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* BUTTONS */
+.btn {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  width: 20rem;
+  text-align: center;
+  border: 0.1rem solid red;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color:red;
+  background-color: white;
+}
+
+.btn:hover {
+  cursor: progress;
+  box-shadow: 0 0.4rem 1.4rem 0 red);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+
+  #highScoresList {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 4rem;
+      }
+      
+      .high-score {
+        font-size: 2.8rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .high-score:hover {
+        transform: scale(1.025);
+      }</style>
+  <body>
+    <div class="container">
+      <div id="highScores" class="flex-center flex-column">
+        <h1 id="finalScore">High Scores</h1>
+        <ul id="highScoresList"></ul>
+        <a class="btn" href="game.html">Go Home</a>
+      </div>
+    </div>
+    <script>
+    var highScoresList = document.getElementById("highScoresList");
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+highScoresList.innerHTML = highScores
+  .map(score => {
+  return `<li class="high-score">${score.name} - ${score.score}</li>`;
+  })
+ .join("");
+  </script>
+  </body>
+</html>

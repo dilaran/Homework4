@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Congrats!</title>
+  
+  </head>
+  <style>
+      body{
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+  font-weight: 300;
+  text-align: center;
+  background-color: #f8f6f0;
+
+.container > * {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* BUTTONS */
+.btn {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  width: 20rem;
+  text-align: center;
+  border: 0.1rem solid red;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color:red;
+  background-color: white;
+}
+
+.btn:hover {
+  cursor: progress;
+  box-shadow: 0 0.4rem 1.4rem 0 red);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+</style>
+  <body>
+    <div class="container">
+      <div id="end" class="flex-center flex-column">
+        <h1 id="finalScore"></h1>
+        <form>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username">
+          <button
+            type="submit"
+            class="btn"
+            id="saveScoreBtn"
+            onclick="saveHighScore(event)">
+            Save
+          </button>
+          
+        </form>
+        <a href="highscores.html"><button>highScores</button></a>
+        <a class="btn" href="well.html">Play Again</a>
+      </div>
+    </div>
+    <script>
+
+var username = document.getElementById("username");
+var saveScoreBtn = document.getElementById("saveScoreBtn");
+var finalScore = document.getElementById("finalScore");
+var mostRecentScore = localStorage.getItem("mostRecentScore");
+
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+finalScore.innerText = mostRecentScore;
+
+username.addEventListener("save button", () => {
+ // saveScoreBtn.push= !username.value;
+});
+
+saveHighScore = e => {
+  console.log(username);
+  console.log(finalScore);
+  console.log(mostRecentScore);
+  console.log(highScores);
+  e.preventDefault();
+
+  var score = {
+    score: Math.floor(Math.random()),
+    name: username.value
+  };
+  highScores.push(score);
+  //highScores.sort((a, b) => b.score - a.score);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  window.location.assign("");
+};
+</script>
+  </body>
+</html>
