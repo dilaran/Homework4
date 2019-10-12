@@ -75,11 +75,7 @@ button:hover{
 </style>
 <body>
   <span id="timer"></span>
-  <h1>Coding Quiz</h1>
-  <div class="Welcome"><div id="start"></div>
-  </div>
-  <h2>blah blah blah</h2>
-  <button id="begin">Let's start</button>
+  <h1>Quiz on Important Facts</h1>
   <div class="quiz-container">
     <div id="quiz"></div>
   </div>
@@ -99,23 +95,23 @@ clearInterval(time);
 alert("Time out!! :(");
 }
 }
-  (function() {
-   myQuestions = [
+(function() {
+  const myQuestions = [
     {
-      question: "Who is the strongest?",
+      question: "Inside which HTML element do we put the JavaScript?",
       answers: {
-        a: "Superman",
-        b: "The Terminator",
-        c: "Waluigi, obviously"
+        a: "<style>",
+        b: "<javascript",
+        c: "<script>"
       },
       correctAnswer: "c"
     },
     {
-      question: "What is the best site ever created?",
+      question: "What is the correct JavaScript syntax to change the content of the HTML element below: p id=demo >This is a demonstration.</p>",
       answers: {
-        a: "SitePoint",
-        b: "Simple Steps Code",
-        c: "Trick question; they're both the best"
+        a: ".document.getElementByName" ,
+        b: "huh",
+        c: ""
       },
       correctAnswer: "c"
     },
@@ -133,12 +129,12 @@ alert("Time out!! :(");
 
   function buildQuiz() {
     // we'll need a place to store the HTML output
-    var output = [];
+    const output = [];
 
     // for each question...
     myQuestions.forEach((currentQuestion, questionNumber) => {
       // we'll want to store the list of answer choices
-      var answers = [];
+      const answers = [];
 
       // and for each available answer...
       for (letter in currentQuestion.answers) {
@@ -154,17 +150,15 @@ alert("Time out!! :(");
 
       // add this question and its answers to the output
       output.push(
-        <div class="start">\
-        <div class="slide"></div>
-        <div class="question"> ${currentQuestion.question} </div>
+        `<div class="slide">
+           <div class="question"> ${currentQuestion.question} </div>
            <div class="answers"> ${answers.join("")} </div>
-         </div>
+         </div>`
       );
     });
 
     // finally combine our output list into one string of HTML and put it on the page
-   startContainer.innerHTML = output.join("");
-    //quizContainer.innerHTML = output.join("");
+    quizContainer.innerHTML = output.join("");
   }
 
   function showResults() {
@@ -177,17 +171,21 @@ alert("Time out!! :(");
     // for each question...
     myQuestions.forEach((currentQuestion, questionNumber) => {
       // find selected answer
-      var answerContainer = answerContainers[questionNumber];
-      var selector = input[name=question${questionNumber}]:checked;
-      var userAnswer = (answerContainer.querySelector(selector) || {}).value;
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
       // if answer is correct
       if (userAnswer === currentQuestion.correctAnswer) {
         // add to the number of correct answers
         numCorrect++;
-        alert ("right answer,bunny")
+
+        // color the answers green
+        answerContainers[questionNumber].style.color = "lightgreen";
       } else {
-        alert ("wrong waaaaaaay!")
+        // if answer is wrong or blank
+        // color the answers red
+        answerContainers[questionNumber].style.color = "red";
       }
     });
 
@@ -201,27 +199,20 @@ alert("Time out!! :(");
     currentSlide = n;
     
     if (currentSlide === 0) {
-      startButton.style.display = "inline-block";
-    }
-  
-    }
-    if (currentSlide === slides.length - 1) {
       previousButton.style.display = "none";
     } else {
       previousButton.style.display = "inline-block";
     }
     
-    if (currentSlide === slides.length - 2) {
+    if (currentSlide === slides.length - 1) {
       nextButton.style.display = "none";
       submitButton.style.display = "inline-block";
     } else {
       nextButton.style.display = "inline-block";
-      submitButton.style.display = "inline-block";
+      submitButton.style.display = "none";
     }
   }
-function showQuiz() {
-  showSlide(currentSlide + 1);
-}
+
   function showNextSlide() {
     showSlide(currentSlide + 1);
   }
@@ -229,18 +220,17 @@ function showQuiz() {
   function showPreviousSlide() {
     showSlide(currentSlide - 1);
   }
-var startContainer = document.getElementById("start");
-var quizContainer = document.getElementById("quiz");
-var resultsContainer = document.getElementById("results");
- var submitButton = document.getElementById("submit");
+
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
 
   // display quiz right away
- 
-var startButton = document.getElementById("begin");
-buildQuiz();
-  var previousButton = document.getElementById("previous");
-  var nextButton = document.getElementById("next");
-  var slides = document.querySelectorAll(".slide");
+  buildQuiz();
+
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
   let currentSlide = 0;
 
   showSlide(0);
@@ -249,7 +239,6 @@ buildQuiz();
   submitButton.addEventListener("click", showResults);
   previousButton.addEventListener("click", showPreviousSlide);
   nextButton.addEventListener("click", showNextSlide);
-  startButton.addEventListener("click",showQuiz)
 })();
 
 </script>
